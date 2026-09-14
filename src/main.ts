@@ -20,7 +20,8 @@ form.addEventListener("submit", (event) => {
   link.href = url;
   link.download = file.fileName;
   link.click();
-  URL.revokeObjectURL(url);
+  // Safari はダウンロードの確認を出してから URL を読みにいくので、すぐには無効にしない
+  setTimeout(() => URL.revokeObjectURL(url), 60_000);
 });
 
 function element<T extends HTMLElement>(id: string, type: new () => T): T {

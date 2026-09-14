@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "staffpaper",
-  "compatibility_date": "2026-09-15",
+  "compatibility_date": "2026-09-11",
   // Worker スクリプトを持たない静的アセット専用デプロイ。PDF はブラウザの中で作る。
   //   pnpm run deploy  →  vite build && wrangler deploy
   "assets": {
