@@ -24,6 +24,7 @@ pnpm run deploy   # ビルドして Cloudflare へ（`pnpm deploy` は pnpm 自�
 
 ```
 index.html              画面（用紙と段組みを選んでダウンロード）
+ui.pen                  画面のデザイン（pen.dev）。アプリからは読まない
 src/main.ts             画面の選択肢を作り、選ばれた組み合わせの PDF をダウンロードさせる
 src/staff-paper.ts      用紙・段組みの定義と、五線の割り付け
 src/pdf.ts              1 ページの PDF をライブラリなしで組み立てる
