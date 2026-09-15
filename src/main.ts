@@ -61,9 +61,8 @@ showPreview();
 function showPreview(): void {
   const { paperId, layoutId, titleField } = selection();
   renderSheet(sheet, drawSheet(paperId, layoutId, titleField));
-  const description = describeStaffPaper(paperId, layoutId, titleField);
-  summary.textContent = description;
-  sheet.setAttribute("aria-label", `${description} のプレビュー`);
+  // プレビューの中身は figcaption が言葉で言い直しているので、読み上げには出さない
+  summary.textContent = describeStaffPaper(paperId, layoutId, titleField);
 }
 
 function selection(): { paperId: PaperId; layoutId: LayoutId; titleField: boolean } {

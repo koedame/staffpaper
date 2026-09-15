@@ -16,6 +16,8 @@
   --radius: 8px;
 
   color-scheme: light dark;
+  /* ui.pen の指定は Noto Sans JP。入っていない環境では OS の UI フォントに落とす
+     （フォントを配ると外部への通信が要るので、ここでは持たない） */
   font-family: "Noto Sans JP", system-ui, sans-serif;
   line-height: 1.6;
 }
@@ -106,10 +108,7 @@ body {
   border: 0;
 }
 
-/* legend は grid の外に出るので、幅いっぱいの見出しとして浮かせる */
 .field legend {
-  float: left;
-  width: 100%;
   margin-bottom: 10px;
   padding: 0;
   font-size: 14px;
@@ -118,7 +117,6 @@ body {
 
 .options {
   display: grid;
-  clear: both;
   gap: 8px;
 }
 
@@ -159,6 +157,17 @@ body {
   background: var(--accent);
   color: var(--on-accent);
   font-weight: 700;
+}
+
+/* 強制カラー（ハイコントラスト）では背景色が落ちるので、選択中を枠の太さで示す */
+@media (forced-colors: active) {
+  .option:has(input:checked) {
+    border-width: 3px;
+  }
+
+  .button {
+    border: 1px solid ButtonBorder;
+  }
 }
 
 /* フォーカスは選択中かどうかに関係なく、枠の全周を青くして示す */

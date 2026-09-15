@@ -1,6 +1,20 @@
 import { describe, expect, it } from "vitest";
 import { sheetPaths } from "./preview.ts";
-import { drawSheet } from "./staff-paper.ts";
+import { createStaffPaper, drawSheet, type LayoutId } from "./staff-paper.ts";
+
+const PT_PER_MM = 72 / 25.4;
+
+/** PDF の描画命令から直線を拾い、mm・紙の上端を原点とした座標に戻す */
+function pdfSegments(layoutId: LayoutId, titleField: boolean, height: number): number[][] {
+  const pdf = new TextDecoder("latin1").decode(createStaffPaper("A4", layoutId, titleField).bytes);
+  const pattern = /^([\d.]+) ([\d.]+) m ([\d.]+) ([\d.]+) l S$/gm;
+  return [...pdf.matchAll(pattern)].map((m) => [
+    Number(m[1]) / PT_PER_MM,
+    height - Number(m[2]) / PT_PER_MM,
+    Number(m[3]) / PT_PER_MM,
+    height - Number(m[4]) / PT_PER_MM,
+  ]);
+}
 
 /** d 属性の直線を [x0, y0, x1, y1] の並びにする */
 function segments(d: string): number[][] {
@@ -10,12 +24,10 @@ function segments(d: string): number[][] {
 }
 
 describe("プレビュー", () => {
-  it("用紙を描いたとき、PDF と同じ図形が同じ位置に並ぶこと", () => {
+  it("用紙を描いたとき、同じ組み合わせの PDF と線が同じ位置に並ぶこと", () => {
     const sheet = drawSheet("A4", "12staves", true);
     const found = segments(sheetPaths(sheet).staves);
-    const expected = sheet.shapes
-      .filter((shape) => shape.kind === "line")
-      .map((shape) => [...shape.from, ...shape.to]);
+    const expected = pdfSegments("12staves", true, sheet.height);
     expect(found).toHaveLength(expected.length);
     found.forEach((segment, i) => {
       segment.forEach((value, axis) => {

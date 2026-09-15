@@ -26,7 +26,9 @@ export function renderSheet(svg: SVGSVGElement, sheet: Sheet): void {
   svg.style.setProperty("--sheet-width", String(sheet.width));
   svg.style.setProperty("--sheet-height", String(sheet.height));
   const { staves, braces } = sheetPaths(sheet);
-  svg.replaceChildren(path("staves", staves), path("braces", braces));
+  const paths = [path("staves", staves)];
+  if (braces) paths.push(path("braces", braces));
+  svg.replaceChildren(...paths);
 }
 
 function path(className: string, d: string): SVGPathElement {

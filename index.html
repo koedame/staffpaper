@@ -16,8 +16,8 @@
         <p>印刷用の五線紙を PDF で作る</p>
       </div>
     </header>
-    <form class="app" id="form">
-      <div class="settings">
+    <main class="app">
+      <form class="settings" id="form">
         <fieldset class="field">
           <legend>用紙</legend>
           <div class="options options--pair" id="paper-options"></div>
@@ -52,14 +52,14 @@
           </button>
           <p class="note">ブラウザの中で作ります。サーバには何も送りません</p>
         </div>
-      </div>
+      </form>
       <figure class="preview">
         <div class="well">
-          <svg class="sheet" id="sheet" role="img" aria-label="五線紙のプレビュー"></svg>
+          <svg class="sheet" id="sheet" aria-hidden="true"></svg>
         </div>
         <figcaption class="summary" id="summary"></figcaption>
       </figure>
-    </form>
+    </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

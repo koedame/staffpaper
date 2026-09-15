@@ -57,6 +57,7 @@ const SCREENS = [
 const server = createServer(async (request, response) => {
   const path = (request.url ?? "/").split("?")[0];
   const file = join(DIST, path === "/" ? "index.html" : path);
+  if (!file.startsWith(DIST)) return void response.writeHead(403).end("forbidden");
   try {
     const body = await readFile(file);
     response.writeHead(200, { "content-type": TYPES[extname(file)] ?? "application/octet-stream" });

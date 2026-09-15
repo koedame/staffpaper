@@ -235,6 +235,23 @@ describe("タイトル欄", () => {
     },
   );
 
+  it("A4 でタイトル欄ありを選んだとき、線が紙の上から 28mm・左から 45mm に 120mm 引かれること", () => {
+    // 寸法の定義が変わったら落ちるように、mm の実寸をそのまま書く
+    const pdf = text(createStaffPaper("A4", "12staves", true).bytes);
+    const [line] = titleLines(pdf);
+    if (!line) throw new Error("title line not found");
+    expect(line.x0 / PT_PER_MM).toBeCloseTo(45, 1);
+    expect(line.x1 / PT_PER_MM).toBeCloseTo(165, 1);
+    expect(297 - line.y0 / PT_PER_MM).toBeCloseTo(28, 1);
+  });
+
+  it("A4・12 段でタイトル欄ありを選んだとき、一番上の五線が紙の上から 41.5mm から始まること", () => {
+    // 上の余白 15mm + タイトル欄 20mm の下に、残り 247mm を 12 等分して割り付ける
+    const pdf = text(createStaffPaper("A4", "12staves", true).bytes);
+    const top = Math.max(...staffLines(pdf, PAPERS[0]).map((line) => line.y0));
+    expect(297 - top / PT_PER_MM).toBeCloseTo(41.5, 1);
+  });
+
   it("タイトル欄ありを選んだとき、組み合わせの説明にそれが入ること", () => {
     expect(describeStaffPaper("A4", "12staves", true)).toBe("A4・12 段・タイトル欄あり");
     expect(describeStaffPaper("A3-spread", "grand-staff-06systems", false)).toBe(

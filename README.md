@@ -16,7 +16,8 @@ https://staffpaper.koeda.me
 pnpm install
 pnpm dev          # 開発サーバ
 pnpm check        # lint / typecheck / test / build（CI と同じ）
-pnpm build && pnpm screenshot   # 各画面を実ブラウザで撮って screenshots/ に置く
+pnpm exec playwright install chromium   # 撮影に使うブラウザ（最初の 1 回だけ）
+pnpm build && pnpm screenshot           # 各画面を実ブラウザで撮って screenshots/ に置く
 pnpm run deploy   # ビルドして Cloudflare へ（`pnpm deploy` は pnpm 自身の別コマンド）
 ```
 
