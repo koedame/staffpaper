@@ -3,7 +3,7 @@
   "children": [
     {
       "type": "frame",
-      "id": "t88hQ",
+      "id": "r8TQC",
       "x": 0,
       "y": 0,
       "name": "部品",
@@ -18,7 +18,7 @@
       "children": [
         {
           "type": "text",
-          "id": "R7WRi",
+          "id": "Y1WcL9",
           "name": "部品の見出し",
           "fill": "$text-primary",
           "content": "部品",
@@ -28,7 +28,7 @@
         },
         {
           "type": "frame",
-          "id": "n7HFi",
+          "id": "o12eV",
           "name": "ロゴ",
           "reusable": true,
           "width": 28,
@@ -41,7 +41,7 @@
           "children": [
             {
               "type": "path",
-              "id": "tMjXn",
+              "id": "EW7Pv",
               "x": 0,
               "y": 0,
               "name": "五線",
@@ -60,21 +60,21 @@
         },
         {
           "type": "frame",
-          "id": "DVUi1",
+          "id": "aVyU3",
           "name": "選択肢",
           "reusable": true,
           "width": 120,
           "height": 44,
           "fill": "$surface",
           "cornerRadius": "$radius",
-          "stroke": "$border",
+          "stroke": "$control-border",
           "strokeWidth": 1,
           "justifyContent": "center",
           "alignItems": "center",
           "children": [
             {
               "type": "text",
-              "id": "ozxNa",
+              "id": "Jopxa",
               "name": "ラベル",
               "fill": "$text-primary",
               "content": "12 段",
@@ -86,7 +86,7 @@
         },
         {
           "type": "frame",
-          "id": "F5rLm",
+          "id": "UOUfr",
           "name": "ボタン",
           "reusable": true,
           "width": 320,
@@ -99,7 +99,7 @@
           "children": [
             {
               "type": "icon",
-              "id": "YyM0C",
+              "id": "C8AR1k",
               "name": "アイコン",
               "width": 18,
               "height": 18,
@@ -109,7 +109,7 @@
             },
             {
               "type": "text",
-              "id": "nIO4T",
+              "id": "Yfm6I",
               "name": "ラベル",
               "fill": "$on-accent",
               "content": "PDF をダウンロード",
@@ -121,34 +121,74 @@
         },
         {
           "type": "frame",
-          "id": "Le6t4",
+          "id": "CoWNO",
           "name": "選択肢の状態",
           "width": "fill_container",
           "gap": 8,
           "children": [
             {
-              "id": "w0AHA3",
+              "id": "hyx82",
               "type": "ref",
-              "ref": "DVUi1",
+              "ref": "aVyU3",
               "name": "選択肢: 選択していない",
               "width": "fill_container",
               "descendants": {
-                "ozxNa": {
+                "Jopxa": {
                   "content": "選択していない"
                 }
               }
             },
             {
-              "id": "Q4WrS0",
+              "id": "OL0Hy",
               "type": "ref",
-              "ref": "DVUi1",
+              "ref": "aVyU3",
               "name": "選択肢: 選択中",
               "width": "fill_container",
               "fill": "$accent",
               "stroke": "$accent",
               "descendants": {
-                "ozxNa": {
+                "Jopxa": {
                   "content": "選択中",
+                  "fill": "$on-accent",
+                  "fontWeight": "700"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "YOr3J",
+          "name": "フォーカス",
+          "width": "fill_container",
+          "gap": 8,
+          "children": [
+            {
+              "id": "tHiI9",
+              "type": "ref",
+              "ref": "aVyU3",
+              "name": "選択肢: フォーカス",
+              "width": "fill_container",
+              "stroke": "$focus",
+              "strokeWidth": 2,
+              "descendants": {
+                "Jopxa": {
+                  "content": "フォーカス"
+                }
+              }
+            },
+            {
+              "id": "cSOye",
+              "type": "ref",
+              "ref": "aVyU3",
+              "name": "選択肢: 選択中＋フォーカス",
+              "width": "fill_container",
+              "fill": "$accent",
+              "stroke": "$focus",
+              "strokeWidth": 2,
+              "descendants": {
+                "Jopxa": {
+                  "content": "選択中＋フォーカス",
                   "fill": "$on-accent",
                   "fontWeight": "700"
                 }
@@ -160,7 +200,7 @@
     },
     {
       "type": "frame",
-      "id": "P3IE21",
+      "id": "qdxen",
       "x": 540,
       "y": 0,
       "name": "PC — A4・12 段",
@@ -175,7 +215,7 @@
       "children": [
         {
           "type": "frame",
-          "id": "G9PEav",
+          "id": "bJ7yr",
           "name": "ヘッダー",
           "width": "fill_container",
           "height": 64,
@@ -192,14 +232,14 @@
           "alignItems": "center",
           "children": [
             {
-              "id": "hL1JF",
+              "id": "IUnWW",
               "type": "ref",
-              "ref": "n7HFi",
+              "ref": "o12eV",
               "name": "ロゴ"
             },
             {
               "type": "text",
-              "id": "thPrU",
+              "id": "oykq7",
               "name": "サービス名",
               "fill": "$text-primary",
               "content": "staffpaper",
@@ -209,7 +249,7 @@
             },
             {
               "type": "text",
-              "id": "DB1wI",
+              "id": "n7P7l",
               "name": "説明",
               "fill": "$text-secondary",
               "content": "印刷用の五線紙を PDF で作る",
@@ -221,14 +261,14 @@
         },
         {
           "type": "frame",
-          "id": "u0TOTb",
+          "id": "jnzbw",
           "name": "本体",
           "width": "fill_container",
           "height": "fill_container",
           "children": [
             {
               "type": "frame",
-              "id": "KPUGH",
+              "id": "f8476",
               "name": "設定",
               "width": 360,
               "height": "fill_container",
@@ -243,7 +283,7 @@
               "children": [
                 {
                   "type": "frame",
-                  "id": "ZQMju",
+                  "id": "wyVvN",
                   "name": "用紙",
                   "width": "fill_container",
                   "layout": "vertical",
@@ -251,7 +291,7 @@
                   "children": [
                     {
                       "type": "text",
-                      "id": "n9OH8",
+                      "id": "heGN7",
                       "name": "見出し: 用紙",
                       "fill": "$text-primary",
                       "content": "用紙",
@@ -261,22 +301,22 @@
                     },
                     {
                       "type": "frame",
-                      "id": "GbkfU",
+                      "id": "snNv9",
                       "name": "用紙の選択肢",
                       "width": "fill_container",
                       "gap": 8,
                       "children": [
                         {
-                          "id": "S47Gmk",
+                          "id": "x8fgtW",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: A4",
                           "width": "fill_container",
                           "height": 44,
                           "fill": "$accent",
                           "stroke": "$accent",
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "A4",
                               "fill": "$on-accent",
                               "fontWeight": "700"
@@ -284,14 +324,14 @@
                           }
                         },
                         {
-                          "id": "BtIxg",
+                          "id": "L0XBKY",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: A3（A4 見開き）",
                           "width": "fill_container",
                           "height": 44,
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "A3（A4 見開き）"
                             }
                           }
@@ -302,7 +342,7 @@
                 },
                 {
                   "type": "frame",
-                  "id": "H3TtN",
+                  "id": "WF0zp",
                   "name": "段組み",
                   "width": "fill_container",
                   "layout": "vertical",
@@ -310,7 +350,7 @@
                   "children": [
                     {
                       "type": "text",
-                      "id": "yEX13",
+                      "id": "OTKli",
                       "name": "見出し: 段組み",
                       "fill": "$text-primary",
                       "content": "段組み",
@@ -320,46 +360,46 @@
                     },
                     {
                       "type": "frame",
-                      "id": "t7Ombc",
+                      "id": "C6xFv5",
                       "name": "段数の選択肢 1",
                       "width": "fill_container",
                       "gap": 8,
                       "children": [
                         {
-                          "id": "Vp0VA",
+                          "id": "CUVTr",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: 6 段",
                           "width": "fill_container",
                           "height": 44,
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "6 段"
                             }
                           }
                         },
                         {
-                          "id": "N0BLWJ",
+                          "id": "sPfX6",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: 8 段",
                           "width": "fill_container",
                           "height": 44,
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "8 段"
                             }
                           }
                         },
                         {
-                          "id": "p6PDvN",
+                          "id": "VCiYG",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: 10 段",
                           "width": "fill_container",
                           "height": 44,
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "10 段"
                             }
                           }
@@ -368,22 +408,22 @@
                     },
                     {
                       "type": "frame",
-                      "id": "y87Ay",
+                      "id": "So7mA",
                       "name": "段数の選択肢 2",
                       "width": "fill_container",
                       "gap": 8,
                       "children": [
                         {
-                          "id": "Aqn7x",
+                          "id": "C3VP3W",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: 12 段",
                           "width": "fill_container",
                           "height": 44,
                           "fill": "$accent",
                           "stroke": "$accent",
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "12 段",
                               "fill": "$on-accent",
                               "fontWeight": "700"
@@ -391,27 +431,27 @@
                           }
                         },
                         {
-                          "id": "fZG4G",
+                          "id": "DYBEy",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: 14 段",
                           "width": "fill_container",
                           "height": 44,
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "14 段"
                             }
                           }
                         },
                         {
-                          "id": "wdc46",
+                          "id": "ySrO7",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: 16 段",
                           "width": "fill_container",
                           "height": 44,
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "16 段"
                             }
                           }
@@ -419,14 +459,14 @@
                       ]
                     },
                     {
-                      "id": "nugOx",
+                      "id": "TWPtY",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: 大譜表 6 組",
                       "width": "fill_container",
                       "height": 44,
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "大譜表 6 組"
                         }
                       }
@@ -435,14 +475,7 @@
                 },
                 {
                   "type": "frame",
-                  "id": "K9DH2P",
-                  "name": "余白",
-                  "width": "fill_container",
-                  "height": "fill_container"
-                },
-                {
-                  "type": "frame",
-                  "id": "A7QHH",
+                  "id": "mt2tQ",
                   "name": "ダウンロード",
                   "width": "fill_container",
                   "layout": "vertical",
@@ -450,18 +483,18 @@
                   "alignItems": "center",
                   "children": [
                     {
-                      "id": "BBd58",
+                      "id": "K25FNx",
                       "type": "ref",
-                      "ref": "F5rLm",
+                      "ref": "UOUfr",
                       "name": "PDF をダウンロード",
                       "width": "fill_container"
                     },
                     {
                       "type": "text",
-                      "id": "GQps9",
+                      "id": "msAAX",
                       "name": "補足",
                       "fill": "$text-secondary",
-                      "content": "ブラウザの中で作るので、どこにも送信されません",
+                      "content": "ブラウザの中で作ります。サーバには何も送りません",
                       "fontFamily": "Noto Sans JP",
                       "fontSize": 12,
                       "fontWeight": "normal"
@@ -472,7 +505,7 @@
             },
             {
               "type": "frame",
-              "id": "wFRxO",
+              "id": "fuVsQ",
               "name": "プレビュー",
               "width": "fill_container",
               "height": "fill_container",
@@ -484,7 +517,7 @@
               "children": [
                 {
                   "type": "frame",
-                  "id": "vFCzB",
+                  "id": "zPcNy",
                   "name": "用紙のプレビュー",
                   "clip": true,
                   "width": 424.24,
@@ -504,7 +537,7 @@
                   "children": [
                     {
                       "type": "path",
-                      "id": "FhN3M",
+                      "id": "vmf0U",
                       "x": 0,
                       "y": 0,
                       "name": "五線",
@@ -523,10 +556,10 @@
                 },
                 {
                   "type": "text",
-                  "id": "fzJYY",
+                  "id": "AyY6s",
                   "name": "いまの組み合わせ",
                   "fill": "$text-secondary",
-                  "content": "A4 ・ 12 段",
+                  "content": "A4・12 段",
                   "fontFamily": "Noto Sans JP",
                   "fontSize": 13,
                   "fontWeight": "normal"
@@ -539,7 +572,7 @@
     },
     {
       "type": "frame",
-      "id": "CGhTz",
+      "id": "QmBPm",
       "x": 1940,
       "y": 0,
       "name": "PC — A3 見開き・大譜表 6 組",
@@ -554,7 +587,7 @@
       "children": [
         {
           "type": "frame",
-          "id": "wMFZe",
+          "id": "xJa2q",
           "name": "ヘッダー",
           "width": "fill_container",
           "height": 64,
@@ -571,14 +604,14 @@
           "alignItems": "center",
           "children": [
             {
-              "id": "ZV1YE",
+              "id": "S5WCUm",
               "type": "ref",
-              "ref": "n7HFi",
+              "ref": "o12eV",
               "name": "ロゴ"
             },
             {
               "type": "text",
-              "id": "YDjbl",
+              "id": "dewgP",
               "name": "サービス名",
               "fill": "$text-primary",
               "content": "staffpaper",
@@ -588,7 +621,7 @@
             },
             {
               "type": "text",
-              "id": "GoqQN",
+              "id": "JwNEX",
               "name": "説明",
               "fill": "$text-secondary",
               "content": "印刷用の五線紙を PDF で作る",
@@ -600,14 +633,14 @@
         },
         {
           "type": "frame",
-          "id": "mfaRi",
+          "id": "RK3ao",
           "name": "本体",
           "width": "fill_container",
           "height": "fill_container",
           "children": [
             {
               "type": "frame",
-              "id": "YspJ4",
+              "id": "rbqH5",
               "name": "設定",
               "width": 360,
               "height": "fill_container",
@@ -622,7 +655,7 @@
               "children": [
                 {
                   "type": "frame",
-                  "id": "X48C0r",
+                  "id": "zEOiQ",
                   "name": "用紙",
                   "width": "fill_container",
                   "layout": "vertical",
@@ -630,7 +663,7 @@
                   "children": [
                     {
                       "type": "text",
-                      "id": "uGSvt",
+                      "id": "A13XLg",
                       "name": "見出し: 用紙",
                       "fill": "$text-primary",
                       "content": "用紙",
@@ -640,35 +673,35 @@
                     },
                     {
                       "type": "frame",
-                      "id": "s6LwxI",
+                      "id": "Kr5KD",
                       "name": "用紙の選択肢",
                       "width": "fill_container",
                       "gap": 8,
                       "children": [
                         {
-                          "id": "N7IiU",
+                          "id": "czAP2",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: A4",
                           "width": "fill_container",
                           "height": 44,
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "A4"
                             }
                           }
                         },
                         {
-                          "id": "uMpFU",
+                          "id": "vfbcb",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: A3（A4 見開き）",
                           "width": "fill_container",
                           "height": 44,
                           "fill": "$accent",
                           "stroke": "$accent",
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "A3（A4 見開き）",
                               "fill": "$on-accent",
                               "fontWeight": "700"
@@ -681,7 +714,7 @@
                 },
                 {
                   "type": "frame",
-                  "id": "EbiaR",
+                  "id": "I45Rh",
                   "name": "段組み",
                   "width": "fill_container",
                   "layout": "vertical",
@@ -689,7 +722,7 @@
                   "children": [
                     {
                       "type": "text",
-                      "id": "kPdSj",
+                      "id": "MBdZD",
                       "name": "見出し: 段組み",
                       "fill": "$text-primary",
                       "content": "段組み",
@@ -699,46 +732,46 @@
                     },
                     {
                       "type": "frame",
-                      "id": "s9bRTi",
+                      "id": "zHEan",
                       "name": "段数の選択肢 1",
                       "width": "fill_container",
                       "gap": 8,
                       "children": [
                         {
-                          "id": "Zyr6F",
+                          "id": "zOogA",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: 6 段",
                           "width": "fill_container",
                           "height": 44,
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "6 段"
                             }
                           }
                         },
                         {
-                          "id": "Iq8Go",
+                          "id": "xa9Ci",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: 8 段",
                           "width": "fill_container",
                           "height": 44,
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "8 段"
                             }
                           }
                         },
                         {
-                          "id": "sIbow",
+                          "id": "V7skma",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: 10 段",
                           "width": "fill_container",
                           "height": 44,
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "10 段"
                             }
                           }
@@ -747,46 +780,46 @@
                     },
                     {
                       "type": "frame",
-                      "id": "ZOXho",
+                      "id": "iXBdQ",
                       "name": "段数の選択肢 2",
                       "width": "fill_container",
                       "gap": 8,
                       "children": [
                         {
-                          "id": "wDzMp",
+                          "id": "vQxtn",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: 12 段",
                           "width": "fill_container",
                           "height": 44,
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "12 段"
                             }
                           }
                         },
                         {
-                          "id": "aDZ6i",
+                          "id": "j4nker",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: 14 段",
                           "width": "fill_container",
                           "height": 44,
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "14 段"
                             }
                           }
                         },
                         {
-                          "id": "uiwez",
+                          "id": "ulsAd",
                           "type": "ref",
-                          "ref": "DVUi1",
+                          "ref": "aVyU3",
                           "name": "選択肢: 16 段",
                           "width": "fill_container",
                           "height": 44,
                           "descendants": {
-                            "ozxNa": {
+                            "Jopxa": {
                               "content": "16 段"
                             }
                           }
@@ -794,16 +827,16 @@
                       ]
                     },
                     {
-                      "id": "JQdc9",
+                      "id": "p60iBO",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: 大譜表 6 組",
                       "width": "fill_container",
                       "height": 44,
                       "fill": "$accent",
                       "stroke": "$accent",
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "大譜表 6 組",
                           "fill": "$on-accent",
                           "fontWeight": "700"
@@ -814,14 +847,7 @@
                 },
                 {
                   "type": "frame",
-                  "id": "fstni",
-                  "name": "余白",
-                  "width": "fill_container",
-                  "height": "fill_container"
-                },
-                {
-                  "type": "frame",
-                  "id": "C5Qje",
+                  "id": "tFwl9",
                   "name": "ダウンロード",
                   "width": "fill_container",
                   "layout": "vertical",
@@ -829,18 +855,18 @@
                   "alignItems": "center",
                   "children": [
                     {
-                      "id": "X2Tx0",
+                      "id": "x6M8Y",
                       "type": "ref",
-                      "ref": "F5rLm",
+                      "ref": "UOUfr",
                       "name": "PDF をダウンロード",
                       "width": "fill_container"
                     },
                     {
                       "type": "text",
-                      "id": "nwMcE",
+                      "id": "pX6JR",
                       "name": "補足",
                       "fill": "$text-secondary",
-                      "content": "ブラウザの中で作るので、どこにも送信されません",
+                      "content": "ブラウザの中で作ります。サーバには何も送りません",
                       "fontFamily": "Noto Sans JP",
                       "fontSize": 12,
                       "fontWeight": "normal"
@@ -851,7 +877,7 @@
             },
             {
               "type": "frame",
-              "id": "e4F5Bg",
+              "id": "apIwA",
               "name": "プレビュー",
               "width": "fill_container",
               "height": "fill_container",
@@ -863,7 +889,7 @@
               "children": [
                 {
                   "type": "frame",
-                  "id": "pjsWN",
+                  "id": "QuESB",
                   "name": "用紙のプレビュー",
                   "clip": true,
                   "width": 840,
@@ -883,7 +909,7 @@
                   "children": [
                     {
                       "type": "path",
-                      "id": "VSgyf",
+                      "id": "oOpKt",
                       "x": 0,
                       "y": 0,
                       "name": "五線",
@@ -902,10 +928,10 @@
                 },
                 {
                   "type": "text",
-                  "id": "kRqVX",
+                  "id": "g182H",
                   "name": "いまの組み合わせ",
                   "fill": "$text-secondary",
-                  "content": "A3（A4 見開き） ・ 大譜表 6 組",
+                  "content": "A3（A4 見開き）・大譜表 6 組",
                   "fontFamily": "Noto Sans JP",
                   "fontSize": 13,
                   "fontWeight": "normal"
@@ -918,7 +944,7 @@
     },
     {
       "type": "frame",
-      "id": "ks7Nc",
+      "id": "ARQDi",
       "x": 3340,
       "y": 0,
       "name": "スマホ — A4・12 段",
@@ -933,7 +959,7 @@
       "children": [
         {
           "type": "frame",
-          "id": "QbDqE",
+          "id": "IbkDM",
           "name": "ヘッダー",
           "width": "fill_container",
           "fill": "$surface",
@@ -949,20 +975,20 @@
           "alignItems": "center",
           "children": [
             {
-              "id": "P5a4S",
+              "id": "P28eOY",
               "type": "ref",
-              "ref": "n7HFi",
+              "ref": "o12eV",
               "name": "ロゴ"
             },
             {
               "type": "frame",
-              "id": "wIi5S",
+              "id": "PkvyN",
               "name": "見出し",
               "layout": "vertical",
               "children": [
                 {
                   "type": "text",
-                  "id": "xlp4r",
+                  "id": "u3TvS",
                   "name": "サービス名",
                   "fill": "$text-primary",
                   "content": "staffpaper",
@@ -972,7 +998,7 @@
                 },
                 {
                   "type": "text",
-                  "id": "oDIpX",
+                  "id": "xQOxx",
                   "name": "説明",
                   "fill": "$text-secondary",
                   "content": "印刷用の五線紙を PDF で作る",
@@ -986,7 +1012,7 @@
         },
         {
           "type": "frame",
-          "id": "VkC0H",
+          "id": "kkqfw",
           "name": "本体",
           "width": "fill_container",
           "height": "fill_container",
@@ -999,7 +1025,7 @@
           "children": [
             {
               "type": "frame",
-              "id": "l6TpN",
+              "id": "zWRTy",
               "name": "プレビュー",
               "width": "fill_container",
               "height": 340,
@@ -1011,7 +1037,7 @@
               "children": [
                 {
                   "type": "frame",
-                  "id": "to8Nw",
+                  "id": "vJKJL",
                   "name": "用紙のプレビュー",
                   "clip": true,
                   "width": 214.95,
@@ -1031,7 +1057,7 @@
                   "children": [
                     {
                       "type": "path",
-                      "id": "WgLr9",
+                      "id": "nofOT",
                       "x": 0,
                       "y": 0,
                       "name": "五線",
@@ -1052,7 +1078,7 @@
             },
             {
               "type": "frame",
-              "id": "okRjv",
+              "id": "GFBuN",
               "name": "用紙",
               "width": "fill_container",
               "layout": "vertical",
@@ -1060,7 +1086,7 @@
               "children": [
                 {
                   "type": "text",
-                  "id": "PDIzx",
+                  "id": "PKViv",
                   "name": "見出し: 用紙",
                   "fill": "$text-primary",
                   "content": "用紙",
@@ -1070,22 +1096,22 @@
                 },
                 {
                   "type": "frame",
-                  "id": "cQbph",
+                  "id": "KRIS3",
                   "name": "用紙の選択肢",
                   "width": "fill_container",
                   "gap": 8,
                   "children": [
                     {
-                      "id": "xS1Zj",
+                      "id": "VvM5b",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: A4",
                       "width": "fill_container",
                       "height": 40,
                       "fill": "$accent",
                       "stroke": "$accent",
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "A4",
                           "fill": "$on-accent",
                           "fontWeight": "700"
@@ -1093,14 +1119,14 @@
                       }
                     },
                     {
-                      "id": "cEUBl",
+                      "id": "MwmgT",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: A3（A4 見開き）",
                       "width": "fill_container",
                       "height": 40,
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "A3（A4 見開き）"
                         }
                       }
@@ -1111,7 +1137,7 @@
             },
             {
               "type": "frame",
-              "id": "KYDFW",
+              "id": "HI7eh",
               "name": "段組み",
               "width": "fill_container",
               "layout": "vertical",
@@ -1119,7 +1145,7 @@
               "children": [
                 {
                   "type": "text",
-                  "id": "DoU4h",
+                  "id": "EAyd5",
                   "name": "見出し: 段組み",
                   "fill": "$text-primary",
                   "content": "段組み",
@@ -1129,46 +1155,46 @@
                 },
                 {
                   "type": "frame",
-                  "id": "NjaHE",
+                  "id": "U3pA6N",
                   "name": "段数の選択肢 1",
                   "width": "fill_container",
                   "gap": 8,
                   "children": [
                     {
-                      "id": "pndYi",
+                      "id": "VdqQ5",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: 6 段",
                       "width": "fill_container",
                       "height": 40,
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "6 段"
                         }
                       }
                     },
                     {
-                      "id": "m0Pov",
+                      "id": "mGFKX",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: 8 段",
                       "width": "fill_container",
                       "height": 40,
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "8 段"
                         }
                       }
                     },
                     {
-                      "id": "TqXKi",
+                      "id": "p87VKx",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: 10 段",
                       "width": "fill_container",
                       "height": 40,
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "10 段"
                         }
                       }
@@ -1177,22 +1203,22 @@
                 },
                 {
                   "type": "frame",
-                  "id": "CrNWP",
+                  "id": "m7coSi",
                   "name": "段数の選択肢 2",
                   "width": "fill_container",
                   "gap": 8,
                   "children": [
                     {
-                      "id": "L0AJS",
+                      "id": "b873B",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: 12 段",
                       "width": "fill_container",
                       "height": 40,
                       "fill": "$accent",
                       "stroke": "$accent",
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "12 段",
                           "fill": "$on-accent",
                           "fontWeight": "700"
@@ -1200,27 +1226,27 @@
                       }
                     },
                     {
-                      "id": "a7gdf",
+                      "id": "MbW99",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: 14 段",
                       "width": "fill_container",
                       "height": 40,
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "14 段"
                         }
                       }
                     },
                     {
-                      "id": "u50i0e",
+                      "id": "lo27Q",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: 16 段",
                       "width": "fill_container",
                       "height": 40,
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "16 段"
                         }
                       }
@@ -1228,14 +1254,14 @@
                   ]
                 },
                 {
-                  "id": "HcX3a",
+                  "id": "bGTNx",
                   "type": "ref",
-                  "ref": "DVUi1",
+                  "ref": "aVyU3",
                   "name": "選択肢: 大譜表 6 組",
                   "width": "fill_container",
                   "height": 40,
                   "descendants": {
-                    "ozxNa": {
+                    "Jopxa": {
                       "content": "大譜表 6 組"
                     }
                   }
@@ -1246,7 +1272,7 @@
         },
         {
           "type": "frame",
-          "id": "F96BZ",
+          "id": "uKrau",
           "name": "下部のバー",
           "width": "fill_container",
           "fill": "$surface",
@@ -1264,7 +1290,7 @@
           "children": [
             {
               "type": "frame",
-              "id": "q1Sfnh",
+              "id": "ACPRq",
               "name": "ダウンロード",
               "width": "fill_container",
               "layout": "vertical",
@@ -1272,18 +1298,18 @@
               "alignItems": "center",
               "children": [
                 {
-                  "id": "W6G3H",
+                  "id": "i5eDDV",
                   "type": "ref",
-                  "ref": "F5rLm",
+                  "ref": "UOUfr",
                   "name": "PDF をダウンロード",
                   "width": "fill_container"
                 },
                 {
                   "type": "text",
-                  "id": "MefnH",
+                  "id": "OStU4",
                   "name": "補足",
                   "fill": "$text-secondary",
-                  "content": "ブラウザの中で作るので、どこにも送信されません",
+                  "content": "ブラウザの中で作ります。サーバには何も送りません",
                   "fontFamily": "Noto Sans JP",
                   "fontSize": 12,
                   "fontWeight": "normal"
@@ -1296,12 +1322,12 @@
     },
     {
       "type": "frame",
-      "id": "F6Abo",
+      "id": "KV4RW",
       "x": 3850,
       "y": 0,
-      "name": "スマホ — ダーク・A4・8 段",
+      "name": "スマホ — A3 見開き・16 段",
       "theme": {
-        "mode": "dark"
+        "mode": "light"
       },
       "clip": true,
       "width": 390,
@@ -1311,7 +1337,7 @@
       "children": [
         {
           "type": "frame",
-          "id": "I2OrxT",
+          "id": "Ajrk2",
           "name": "ヘッダー",
           "width": "fill_container",
           "fill": "$surface",
@@ -1327,20 +1353,20 @@
           "alignItems": "center",
           "children": [
             {
-              "id": "Ty4SZ",
+              "id": "HOb9l",
               "type": "ref",
-              "ref": "n7HFi",
+              "ref": "o12eV",
               "name": "ロゴ"
             },
             {
               "type": "frame",
-              "id": "KIiMc",
+              "id": "zRavh",
               "name": "見出し",
               "layout": "vertical",
               "children": [
                 {
                   "type": "text",
-                  "id": "omoXs",
+                  "id": "yv5uc",
                   "name": "サービス名",
                   "fill": "$text-primary",
                   "content": "staffpaper",
@@ -1350,7 +1376,7 @@
                 },
                 {
                   "type": "text",
-                  "id": "q5u6Ww",
+                  "id": "RGXXS",
                   "name": "説明",
                   "fill": "$text-secondary",
                   "content": "印刷用の五線紙を PDF で作る",
@@ -1364,7 +1390,7 @@
         },
         {
           "type": "frame",
-          "id": "C8JF2m",
+          "id": "FJFSc",
           "name": "本体",
           "width": "fill_container",
           "height": "fill_container",
@@ -1377,7 +1403,7 @@
           "children": [
             {
               "type": "frame",
-              "id": "vCdhB",
+              "id": "b5euT",
               "name": "プレビュー",
               "width": "fill_container",
               "height": 340,
@@ -1389,7 +1415,385 @@
               "children": [
                 {
                   "type": "frame",
-                  "id": "jDlFl",
+                  "id": "qogFb",
+                  "name": "用紙のプレビュー",
+                  "clip": true,
+                  "width": 318,
+                  "height": 224.87,
+                  "fill": "$paper",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$sheet-shadow",
+                    "offset": {
+                      "x": 0,
+                      "y": 6
+                    },
+                    "blur": 20
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "path",
+                      "id": "pNVQR",
+                      "x": 0,
+                      "y": 0,
+                      "name": "五線",
+                      "geometry": "M11.36 14.81h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.24h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.72h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.72h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.72h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.72h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.72h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.72h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.72h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m159-194.45h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.24h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.72h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.72h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.72h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.72h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.72h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.72h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.71h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 7.72h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z m0 1.23h136.28v0.8h-136.28z",
+                      "viewBox": [
+                        0,
+                        0,
+                        318,
+                        224.87
+                      ],
+                      "fill": "$ink",
+                      "width": 318,
+                      "height": 224.87
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vmzxa",
+              "name": "用紙",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "vso18",
+                  "name": "見出し: 用紙",
+                  "fill": "$text-primary",
+                  "content": "用紙",
+                  "fontFamily": "Noto Sans JP",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "A4iPoI",
+                  "name": "用紙の選択肢",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "id": "UndhV",
+                      "type": "ref",
+                      "ref": "aVyU3",
+                      "name": "選択肢: A4",
+                      "width": "fill_container",
+                      "height": 40,
+                      "descendants": {
+                        "Jopxa": {
+                          "content": "A4"
+                        }
+                      }
+                    },
+                    {
+                      "id": "Q8di7",
+                      "type": "ref",
+                      "ref": "aVyU3",
+                      "name": "選択肢: A3（A4 見開き）",
+                      "width": "fill_container",
+                      "height": 40,
+                      "fill": "$accent",
+                      "stroke": "$accent",
+                      "descendants": {
+                        "Jopxa": {
+                          "content": "A3（A4 見開き）",
+                          "fill": "$on-accent",
+                          "fontWeight": "700"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "nryp4",
+              "name": "段組み",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "q7E6g",
+                  "name": "見出し: 段組み",
+                  "fill": "$text-primary",
+                  "content": "段組み",
+                  "fontFamily": "Noto Sans JP",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "GuXhH",
+                  "name": "段数の選択肢 1",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "id": "viJiK",
+                      "type": "ref",
+                      "ref": "aVyU3",
+                      "name": "選択肢: 6 段",
+                      "width": "fill_container",
+                      "height": 40,
+                      "descendants": {
+                        "Jopxa": {
+                          "content": "6 段"
+                        }
+                      }
+                    },
+                    {
+                      "id": "jw8er",
+                      "type": "ref",
+                      "ref": "aVyU3",
+                      "name": "選択肢: 8 段",
+                      "width": "fill_container",
+                      "height": 40,
+                      "descendants": {
+                        "Jopxa": {
+                          "content": "8 段"
+                        }
+                      }
+                    },
+                    {
+                      "id": "XJn8O",
+                      "type": "ref",
+                      "ref": "aVyU3",
+                      "name": "選択肢: 10 段",
+                      "width": "fill_container",
+                      "height": 40,
+                      "descendants": {
+                        "Jopxa": {
+                          "content": "10 段"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "M1KyC",
+                  "name": "段数の選択肢 2",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "id": "Na5F7",
+                      "type": "ref",
+                      "ref": "aVyU3",
+                      "name": "選択肢: 12 段",
+                      "width": "fill_container",
+                      "height": 40,
+                      "descendants": {
+                        "Jopxa": {
+                          "content": "12 段"
+                        }
+                      }
+                    },
+                    {
+                      "id": "jwJ5L",
+                      "type": "ref",
+                      "ref": "aVyU3",
+                      "name": "選択肢: 14 段",
+                      "width": "fill_container",
+                      "height": 40,
+                      "descendants": {
+                        "Jopxa": {
+                          "content": "14 段"
+                        }
+                      }
+                    },
+                    {
+                      "id": "LFgIy",
+                      "type": "ref",
+                      "ref": "aVyU3",
+                      "name": "選択肢: 16 段",
+                      "width": "fill_container",
+                      "height": 40,
+                      "fill": "$accent",
+                      "stroke": "$accent",
+                      "descendants": {
+                        "Jopxa": {
+                          "content": "16 段",
+                          "fill": "$on-accent",
+                          "fontWeight": "700"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "Cqaz5",
+                  "type": "ref",
+                  "ref": "aVyU3",
+                  "name": "選択肢: 大譜表 6 組",
+                  "width": "fill_container",
+                  "height": 40,
+                  "descendants": {
+                    "Jopxa": {
+                      "content": "大譜表 6 組"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Evzag",
+          "name": "下部のバー",
+          "width": "fill_container",
+          "fill": "$surface",
+          "stroke": "$border",
+          "strokeWidth": {
+            "top": 1
+          },
+          "layout": "vertical",
+          "padding": [
+            12,
+            20,
+            20,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "IIPvF",
+              "name": "ダウンロード",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "nnM65",
+                  "type": "ref",
+                  "ref": "UOUfr",
+                  "name": "PDF をダウンロード",
+                  "width": "fill_container"
+                },
+                {
+                  "type": "text",
+                  "id": "fuTTX",
+                  "name": "補足",
+                  "fill": "$text-secondary",
+                  "content": "ブラウザの中で作ります。サーバには何も送りません",
+                  "fontFamily": "Noto Sans JP",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "p0NxWk",
+      "x": 4360,
+      "y": 0,
+      "name": "スマホ — ダーク・A4・8 段",
+      "theme": {
+        "mode": "dark"
+      },
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "$bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "xFwod",
+          "name": "ヘッダー",
+          "width": "fill_container",
+          "fill": "$surface",
+          "stroke": "$border",
+          "strokeWidth": {
+            "bottom": 1
+          },
+          "gap": 10,
+          "padding": [
+            14,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "S6RlLa",
+              "type": "ref",
+              "ref": "o12eV",
+              "name": "ロゴ"
+            },
+            {
+              "type": "frame",
+              "id": "F122di",
+              "name": "見出し",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "k1Yx86",
+                  "name": "サービス名",
+                  "fill": "$text-primary",
+                  "content": "staffpaper",
+                  "fontFamily": "Noto Sans JP",
+                  "fontSize": 17,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "m21AYZ",
+                  "name": "説明",
+                  "fill": "$text-secondary",
+                  "content": "印刷用の五線紙を PDF で作る",
+                  "fontFamily": "Noto Sans JP",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "aeuf1",
+          "name": "本体",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            16,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "J09Sph",
+              "name": "プレビュー",
+              "width": "fill_container",
+              "height": 340,
+              "fill": "$well",
+              "cornerRadius": 12,
+              "layout": "vertical",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "gXxO3",
                   "name": "用紙のプレビュー",
                   "clip": true,
                   "width": 214.95,
@@ -1409,7 +1813,7 @@
                   "children": [
                     {
                       "type": "path",
-                      "id": "mpWBj",
+                      "id": "Mjs6D",
                       "x": 0,
                       "y": 0,
                       "name": "五線",
@@ -1430,7 +1834,7 @@
             },
             {
               "type": "frame",
-              "id": "DMkmh",
+              "id": "EShtL",
               "name": "用紙",
               "width": "fill_container",
               "layout": "vertical",
@@ -1438,7 +1842,7 @@
               "children": [
                 {
                   "type": "text",
-                  "id": "UGefu",
+                  "id": "hQnv1",
                   "name": "見出し: 用紙",
                   "fill": "$text-primary",
                   "content": "用紙",
@@ -1448,22 +1852,22 @@
                 },
                 {
                   "type": "frame",
-                  "id": "ygc8T",
+                  "id": "u7Q9K",
                   "name": "用紙の選択肢",
                   "width": "fill_container",
                   "gap": 8,
                   "children": [
                     {
-                      "id": "GIfSn",
+                      "id": "DF3VE",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: A4",
                       "width": "fill_container",
                       "height": 40,
                       "fill": "$accent",
                       "stroke": "$accent",
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "A4",
                           "fill": "$on-accent",
                           "fontWeight": "700"
@@ -1471,14 +1875,14 @@
                       }
                     },
                     {
-                      "id": "qTf7O",
+                      "id": "aWyGL",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: A3（A4 見開き）",
                       "width": "fill_container",
                       "height": 40,
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "A3（A4 見開き）"
                         }
                       }
@@ -1489,7 +1893,7 @@
             },
             {
               "type": "frame",
-              "id": "xfJh9",
+              "id": "wEBLD",
               "name": "段組み",
               "width": "fill_container",
               "layout": "vertical",
@@ -1497,7 +1901,7 @@
               "children": [
                 {
                   "type": "text",
-                  "id": "CKqWw",
+                  "id": "Kb4sN",
                   "name": "見出し: 段組み",
                   "fill": "$text-primary",
                   "content": "段組み",
@@ -1507,35 +1911,35 @@
                 },
                 {
                   "type": "frame",
-                  "id": "dRcM0",
+                  "id": "e9ZTh",
                   "name": "段数の選択肢 1",
                   "width": "fill_container",
                   "gap": 8,
                   "children": [
                     {
-                      "id": "mkwd1",
+                      "id": "NHQMm",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: 6 段",
                       "width": "fill_container",
                       "height": 40,
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "6 段"
                         }
                       }
                     },
                     {
-                      "id": "ZToXu",
+                      "id": "tbNJa",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: 8 段",
                       "width": "fill_container",
                       "height": 40,
                       "fill": "$accent",
                       "stroke": "$accent",
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "8 段",
                           "fill": "$on-accent",
                           "fontWeight": "700"
@@ -1543,14 +1947,14 @@
                       }
                     },
                     {
-                      "id": "eynDE",
+                      "id": "ci7DP",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: 10 段",
                       "width": "fill_container",
                       "height": 40,
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "10 段"
                         }
                       }
@@ -1559,46 +1963,46 @@
                 },
                 {
                   "type": "frame",
-                  "id": "uAeqU",
+                  "id": "mOKNn",
                   "name": "段数の選択肢 2",
                   "width": "fill_container",
                   "gap": 8,
                   "children": [
                     {
-                      "id": "E5hly",
+                      "id": "WVqGC",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: 12 段",
                       "width": "fill_container",
                       "height": 40,
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "12 段"
                         }
                       }
                     },
                     {
-                      "id": "twCdV",
+                      "id": "d7rSu7",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: 14 段",
                       "width": "fill_container",
                       "height": 40,
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "14 段"
                         }
                       }
                     },
                     {
-                      "id": "aLTjz",
+                      "id": "q3eWtV",
                       "type": "ref",
-                      "ref": "DVUi1",
+                      "ref": "aVyU3",
                       "name": "選択肢: 16 段",
                       "width": "fill_container",
                       "height": 40,
                       "descendants": {
-                        "ozxNa": {
+                        "Jopxa": {
                           "content": "16 段"
                         }
                       }
@@ -1606,14 +2010,14 @@
                   ]
                 },
                 {
-                  "id": "FTm80",
+                  "id": "a9EHxV",
                   "type": "ref",
-                  "ref": "DVUi1",
+                  "ref": "aVyU3",
                   "name": "選択肢: 大譜表 6 組",
                   "width": "fill_container",
                   "height": 40,
                   "descendants": {
-                    "ozxNa": {
+                    "Jopxa": {
                       "content": "大譜表 6 組"
                     }
                   }
@@ -1624,7 +2028,7 @@
         },
         {
           "type": "frame",
-          "id": "XQCOg",
+          "id": "jJs7H",
           "name": "下部のバー",
           "width": "fill_container",
           "fill": "$surface",
@@ -1642,7 +2046,7 @@
           "children": [
             {
               "type": "frame",
-              "id": "NJHNU",
+              "id": "iwtcO",
               "name": "ダウンロード",
               "width": "fill_container",
               "layout": "vertical",
@@ -1650,18 +2054,18 @@
               "alignItems": "center",
               "children": [
                 {
-                  "id": "ulBuF",
+                  "id": "FA5vO",
                   "type": "ref",
-                  "ref": "F5rLm",
+                  "ref": "UOUfr",
                   "name": "PDF をダウンロード",
                   "width": "fill_container"
                 },
                 {
                   "type": "text",
-                  "id": "mqe0v",
+                  "id": "B8bxP",
                   "name": "補足",
                   "fill": "$text-secondary",
-                  "content": "ブラウザの中で作るので、どこにも送信されません",
+                  "content": "ブラウザの中で作ります。サーバには何も送りません",
                   "fontFamily": "Noto Sans JP",
                   "fontSize": 12,
                   "fontWeight": "normal"
@@ -1854,10 +2258,44 @@
         }
       ]
     },
+    "control-border": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#8F8B82",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#6E6E73",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "focus": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#2563EB",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#93C5FD",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
     "radius": {
       "type": "number",
       "value": 8
     }
   },
-  "fileToken": "487d02d0-ecfb-4bad-9932-91ffa5cf1bfb"
+  "fileToken": "3ae765cf-fbf2-4de5-b855-bce6a49c0265"
 }
