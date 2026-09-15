@@ -1,5 +1,7 @@
 // 五線紙の割り付けを決め、PDF にする。
 // 寸法は mm・紙の上端を原点として考え、PDF に書く直前に pt・下端原点へ変換する。
+// 割り付けの結果は Sheet（mm の図形の集まり）として取り出せる。画面のプレビューは
+// PDF と同じ Sheet から描くので、見えている形と PDF の中身がずれない。
 
 import { buildPdf, num } from "./pdf.ts";
 
@@ -8,6 +10,9 @@ const PT_PER_MM = 72 / 25.4;
 export const MARGIN = { x: 15, top: 15, bottom: 15 } as const;
 /** 五線の太さ（pt） */
 export const LINE_WIDTH = 0.5;
+
+/** タイトルを書く欄。上の余白の下にこの高さを取り、面の中央に線を 1 本引く（mm） */
+export const TITLE_FIELD = { height: 20, lineY: 13, lineLength: 120 } as const;
 
 export type Paper = {
   id: string;
@@ -68,22 +73,68 @@ export const LAYOUTS = [
 export type PaperId = (typeof PAPERS)[number]["id"];
 export type LayoutId = (typeof LAYOUTS)[number]["id"];
 
+/** mm・紙の上端を原点とした点 */
+export type Point = [number, number];
+
+export type Shape =
+  | { kind: "line"; from: Point; to: Point }
+  /** start から 3 次ベジェ曲線をつないだ閉じた形 */
+  | { kind: "fill"; start: Point; curves: [Point, Point, Point][] };
+
+/** 1 枚の紙に引くものすべて。単位は mm、原点は紙の左上 */
+export type Sheet = {
+  width: number;
+  height: number;
+  shapes: Shape[];
+};
+
 export type StaffPaperFile = {
   fileName: string;
   bytes: Uint8Array<ArrayBuffer>;
 };
 
-export function createStaffPaper(paperId: PaperId, layoutId: LayoutId): StaffPaperFile {
+/** 選んだ組み合わせの割り付けを出す */
+export function drawSheet(paperId: PaperId, layoutId: LayoutId, titleField: boolean): Sheet {
   const paper = find(PAPERS, paperId);
   const layout: Layout = find(LAYOUTS, layoutId);
-  const content = drawPage(paper, layout);
+  const shapes: Shape[] = [];
+  const columnWidth = paper.width / paper.columns;
+  // タイトル欄は上の余白の下に取る。見開きでは左右の面の両方に取り、五線の高さを揃える
+  const top = MARGIN.top + (titleField ? TITLE_FIELD.height : 0);
+  for (let column = 0; column < paper.columns; column++) {
+    const left = columnWidth * column + MARGIN.x;
+    const right = columnWidth * (column + 1) - MARGIN.x;
+    if (titleField) drawTitleLine(shapes, left, right);
+    drawColumn(shapes, left, right, top, paper.height - MARGIN.bottom, layout);
+  }
+  return { width: paper.width, height: paper.height, shapes };
+}
+
+/** 選んだ組み合わせを画面に出す文字列。「A4・12 段・タイトル欄あり」 */
+export function describeStaffPaper(
+  paperId: PaperId,
+  layoutId: LayoutId,
+  titleField: boolean,
+): string {
+  const parts: string[] = [find(PAPERS, paperId).label, find(LAYOUTS, layoutId).label];
+  if (titleField) parts.push("タイトル欄あり");
+  return parts.join("・");
+}
+
+export function createStaffPaper(
+  paperId: PaperId,
+  layoutId: LayoutId,
+  titleField: boolean,
+): StaffPaperFile {
+  const sheet = drawSheet(paperId, layoutId, titleField);
+  const suffix = titleField ? "-title" : "";
   return {
-    fileName: `staffpaper-${paper.id}-${layout.id}.pdf`,
+    fileName: `staffpaper-${paperId}-${layoutId}${suffix}.pdf`,
     bytes: buildPdf({
-      width: paper.width * PT_PER_MM,
-      height: paper.height * PT_PER_MM,
-      content,
-      title: `Staff paper ${paper.id} ${layout.id}`,
+      width: sheet.width * PT_PER_MM,
+      height: sheet.height * PT_PER_MM,
+      content: pdfContent(sheet),
+      title: `Staff paper ${paperId} ${layoutId}${suffix}`,
     }),
   };
 }
@@ -94,50 +145,60 @@ function find<T extends { id: string }>(items: readonly T[], id: string): T {
   return item;
 }
 
-function drawPage(paper: Paper, layout: Layout): string {
-  const pen = new Pen(paper.height);
-  const columnWidth = paper.width / paper.columns;
-  for (let column = 0; column < paper.columns; column++) {
-    const left = columnWidth * column + MARGIN.x;
-    const right = columnWidth * (column + 1) - MARGIN.x;
-    drawColumn(pen, left, right, paper.height, layout);
-  }
-  return [`${LINE_WIDTH} w`, "0 g 0 G", ...pen.ops].join("\n");
+/** タイトルを書く欄の下線。面の中央に引く */
+function drawTitleLine(shapes: Shape[], left: number, right: number): void {
+  const center = (left + right) / 2;
+  const half = TITLE_FIELD.lineLength / 2;
+  const y = MARGIN.top + TITLE_FIELD.lineY;
+  shapes.push({ kind: "line", from: [center - half, y], to: [center + half, y] });
 }
 
-function drawColumn(pen: Pen, left: number, right: number, height: number, layout: Layout): void {
+function drawColumn(
+  shapes: Shape[],
+  left: number,
+  right: number,
+  top: number,
+  bottom: number,
+  layout: Layout,
+): void {
   // 段（または組）ごとに同じ高さの枠を割り当て、その中央に置く。
   // こうすると段の間隔と上下の余白が揃う
-  const pitch = (height - MARGIN.top - MARGIN.bottom) / layout.count;
+  const pitch = (bottom - top) / layout.count;
   if (layout.kind === "single") {
     for (let i = 0; i < layout.count; i++) {
-      const top = MARGIN.top + pitch * i + (pitch - layout.staffHeight) / 2;
-      drawStaff(pen, left, right, top, layout.staffHeight);
+      const staffTop = top + pitch * i + (pitch - layout.staffHeight) / 2;
+      drawStaff(shapes, left, right, staffTop, layout.staffHeight);
     }
     return;
   }
   const systemHeight = layout.staffHeight * 2 + layout.gap;
   for (let i = 0; i < layout.count; i++) {
-    const top = MARGIN.top + pitch * i + (pitch - systemHeight) / 2;
-    const bottom = top + systemHeight;
-    drawStaff(pen, left, right, top, layout.staffHeight);
-    drawStaff(pen, left, right, bottom - layout.staffHeight, layout.staffHeight);
+    const staffTop = top + pitch * i + (pitch - systemHeight) / 2;
+    const staffBottom = staffTop + systemHeight;
+    drawStaff(shapes, left, right, staffTop, layout.staffHeight);
+    drawStaff(shapes, left, right, staffBottom - layout.staffHeight, layout.staffHeight);
     // 2 段をつなぐ左端の縦線と波かっこ
-    pen.line(left, top, left, bottom);
-    drawBrace(pen, left - 1, top, bottom);
+    shapes.push({ kind: "line", from: [left, staffTop], to: [left, staffBottom] });
+    drawBrace(shapes, left - 1, staffTop, staffBottom);
   }
 }
 
 /** top を最上線にして、5 本の線を等間隔に引く */
-function drawStaff(pen: Pen, left: number, right: number, top: number, height: number): void {
+function drawStaff(
+  shapes: Shape[],
+  left: number,
+  right: number,
+  top: number,
+  height: number,
+): void {
   for (let i = 0; i < 5; i++) {
     const y = top + (height * i) / 4;
-    pen.line(left, y, right, y);
+    shapes.push({ kind: "line", from: [left, y], to: [right, y] });
   }
 }
 
 /** 大譜表の波かっこ。x は波かっこの右端 */
-function drawBrace(pen: Pen, x: number, top: number, bottom: number): void {
+function drawBrace(shapes: Shape[], x: number, top: number, bottom: number): void {
   const width = 2.6;
   const thickness = 1;
   const middle = (top + bottom) / 2;
@@ -148,37 +209,30 @@ function drawBrace(pen: Pen, x: number, top: number, bottom: number): void {
     [1, top],
     [-1, bottom],
   ] as const) {
-    const p = (dx: number, dy: number): [number, number] => [x + dx, end + sign * dy];
-    pen.fill([
-      p(0, 0),
-      [p(-0.9 * width, 0.12 * half), p(-0.1 * width, 0.88 * half), p(-width, half)],
-      [p(-0.1 * width + thickness, 0.88 * half), p(-0.9 * width + thickness, 0.12 * half), p(0, 0)],
-    ]);
+    const p = (dx: number, dy: number): Point => [x + dx, end + sign * dy];
+    shapes.push({
+      kind: "fill",
+      start: p(0, 0),
+      curves: [
+        [p(-0.9 * width, 0.12 * half), p(-0.1 * width, 0.88 * half), p(-width, half)],
+        [
+          p(-0.1 * width + thickness, 0.88 * half),
+          p(-0.9 * width + thickness, 0.12 * half),
+          p(0, 0),
+        ],
+      ],
+    });
   }
 }
 
-type Point = [number, number];
-
-/** mm・上端原点の座標を受け取り、PDF の描画命令にする */
-class Pen {
-  readonly ops: string[] = [];
-  readonly #paperHeight: number;
-
-  constructor(paperHeight: number) {
-    this.#paperHeight = paperHeight;
-  }
-
-  line(x0: number, y0: number, x1: number, y1: number): void {
-    this.ops.push(`${this.point([x0, y0])} m ${this.point([x1, y1])} l S`);
-  }
-
-  /** start から 3 次ベジェ曲線をつないだ閉じた形を塗る */
-  fill([start, ...curves]: [Point, ...[Point, Point, Point][]]): void {
-    const segments = curves.map((curve) => `${curve.map((p) => this.point(p)).join(" ")} c`);
-    this.ops.push(`${this.point(start)} m ${segments.join(" ")} f`);
-  }
-
-  private point([x, y]: Point): string {
-    return `${num(x * PT_PER_MM)} ${num((this.#paperHeight - y) * PT_PER_MM)}`;
-  }
+/** mm・上端原点の図形を、PDF の描画命令（pt・下端原点）にする */
+function pdfContent(sheet: Sheet): string {
+  const point = ([x, y]: Point): string =>
+    `${num(x * PT_PER_MM)} ${num((sheet.height - y) * PT_PER_MM)}`;
+  const ops = sheet.shapes.map((shape) => {
+    if (shape.kind === "line") return `${point(shape.from)} m ${point(shape.to)} l S`;
+    const segments = shape.curves.map((curve) => `${curve.map(point).join(" ")} c`);
+    return `${point(shape.start)} m ${segments.join(" ")} f`;
+  });
+  return [`${LINE_WIDTH} w`, "0 g 0 G", ...ops].join("\n");
 }

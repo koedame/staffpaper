@@ -1,68 +1,347 @@
+/* 色と角丸は ui.pen のテーマ変数と同じ値。light / dark の 2 つを持つ */
 :root {
+  --bg: #f5f4f0;
+  --surface: #ffffff;
+  --well: #eae8e2;
+  --border: #dad7cf;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --accent: #1f2937;
+  --on-accent: #ffffff;
+  --paper: #ffffff;
+  --ink: #1a1a1a;
+  --sheet-shadow: #1f29372e;
+  --control-border: #8f8b82;
+  --focus: #2563eb;
+  --radius: 8px;
+
   color-scheme: light dark;
-  font-family: system-ui, sans-serif;
+  font-family: "Noto Sans JP", system-ui, sans-serif;
   line-height: 1.6;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121212;
+    --surface: #1c1c1e;
+    --well: #0b0b0c;
+    --border: #3a3a3c;
+    --text-primary: #e5e7eb;
+    --text-secondary: #9ca3af;
+    --accent: #e5e7eb;
+    --on-accent: #111827;
+    --paper: #f4f4f2;
+    --sheet-shadow: #00000099;
+    --control-border: #6e6e73;
+    --focus: #93c5fd;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
   margin: 0;
+  background: var(--bg);
+  color: var(--text-primary);
 }
 
-main {
-  max-width: 28rem;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
+/* ヘッダー */
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
 }
 
-h1 {
+.logo {
+  border-radius: 6px;
+  /* 暗い背景でも縁が見えるように、ロゴの内側に薄い枠を重ねる */
+  outline: 1px solid #ffffff24;
+  outline-offset: -1px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand h1 {
   margin: 0;
-  font-size: 1.75rem;
+  font-size: 17px;
 }
 
-.lead {
-  margin: 0 0 2rem;
-  opacity: 0.7;
+.brand p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-secondary);
 }
 
-form {
+/* 設定 — スマホはプレビューの下に縦に並べ、ダウンロードだけ画面下に貼り付ける */
+
+.app {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 0;
+  padding: 16px 20px 0;
+}
+
+.settings {
+  display: contents;
+}
+
+.field {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* legend は grid の外に出るので、幅いっぱいの見出しとして浮かせる */
+.field legend {
+  float: left;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.options {
   display: grid;
-  gap: 1.25rem;
+  clear: both;
+  gap: 8px;
 }
 
-label {
-  display: grid;
-  gap: 0.375rem;
+.options--pair {
+  grid-template-columns: repeat(2, 1fr);
 }
 
-label span {
-  font-weight: 600;
+.options--layout {
+  grid-template-columns: repeat(3, 1fr);
 }
 
-select,
-button {
-  font: inherit;
-  padding: 0.625rem 0.75rem;
-  border-radius: 0.5rem;
-}
-
-select {
-  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
-  background: transparent;
-  color: inherit;
-}
-
-button {
-  margin-top: 0.5rem;
-  border: none;
-  background: #1f2937;
-  color: #fff;
-  font-weight: 600;
+.option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border: 1px solid var(--control-border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 15px;
   cursor: pointer;
 }
 
-@media (prefers-color-scheme: dark) {
-  button {
-    background: #e5e7eb;
-    color: #111827;
+/* 3 列に収まらない選択肢は 1 行使う */
+.option--wide {
+  grid-column: 1 / -1;
+}
+
+.option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.option:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+}
+
+/* フォーカスは選択中かどうかに関係なく、枠の全周を青くして示す */
+.option:has(input:focus-visible) {
+  border-color: var(--focus);
+  box-shadow: 0 0 0 1px var(--focus);
+}
+
+.download {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: auto -20px 0;
+  padding: 12px 20px 20px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 48px;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--on-accent);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* プレビュー — 選んだ組み合わせの仕上がりを、PDF と同じ割り付けで見せる */
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  order: -1;
+  margin: 0;
+}
+
+.well {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 340px;
+  padding: 18px 16px;
+  background: var(--well);
+  border-radius: 12px;
+  container-type: size;
+}
+
+/* 用紙は縦横比を保ったまま、well に収まる最大の大きさにする */
+.sheet {
+  display: block;
+  width: min(100cqw, 100cqh * var(--sheet-width) / var(--sheet-height));
+  aspect-ratio: var(--sheet-width) / var(--sheet-height);
+  background: var(--paper);
+  box-shadow: 0 6px 20px var(--sheet-shadow);
+}
+
+.sheet .staves {
+  fill: none;
+  stroke: var(--ink);
+  /* 用紙を縮めても五線が消えない太さ。用紙の拡大率に引っぱられないようにする */
+  stroke-width: 0.8;
+  vector-effect: non-scaling-stroke;
+}
+
+.sheet .braces {
+  fill: var(--ink);
+}
+
+/* スマホでは組み合わせを選択肢そのもので分かるので、読み上げにだけ残す */
+.summary {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* PC — 左に設定、右にプレビュー */
+
+@media (min-width: 768px) {
+  body {
+    height: 100dvh;
+  }
+
+  .header {
+    gap: 12px;
+    height: 64px;
+    padding: 0 32px;
+  }
+
+  .brand {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .brand h1 {
+    font-size: 18px;
+  }
+
+  .brand p {
+    font-size: 14px;
+  }
+
+  .app {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 0;
+    padding: 0;
+  }
+
+  .settings {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    overflow-y: auto;
+    padding: 32px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+  }
+
+  .option {
+    height: 44px;
+  }
+
+  /* 選んでから押すまでの距離を詰めるため、設定の直下に置く */
+  .download {
+    position: static;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+  }
+
+  .preview {
+    justify-content: center;
+    order: 0;
+    min-height: 0;
+    padding: 40px;
+  }
+
+  .well {
+    flex: 1;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+  }
+
+  .summary {
+    position: static;
+    width: auto;
+    height: auto;
+    clip-path: none;
+    font-size: 13px;
+    color: var(--text-secondary);
   }
 }
