@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { createStaffPaper, LAYOUTS, MARGIN, PAPERS } from "./staff-paper.ts";
+import {
+  createStaffPaper,
+  describeStaffPaper,
+  LAYOUTS,
+  MARGIN,
+  PAPERS,
+  type Paper,
+  TITLE_FIELD,
+} from "./staff-paper.ts";
 
 const PT_PER_MM = 72 / 25.4;
 
@@ -28,6 +36,22 @@ function lines(pdf: string): Line[] {
   }));
 }
 
+/** 面の余白から余白まで引かれた横線 = 五線 */
+function staffLines(pdf: string, paper: Paper): Line[] {
+  const width = (paper.width / paper.columns - MARGIN.x * 2) * PT_PER_MM;
+  return lines(pdf).filter(
+    (line) => line.y0 === line.y1 && Math.abs(line.x1 - line.x0 - width) < 0.01,
+  );
+}
+
+/** タイトル欄の下線 = 面の中央に引かれた 120mm の横線 */
+function titleLines(pdf: string): Line[] {
+  const width = TITLE_FIELD.lineLength * PT_PER_MM;
+  return lines(pdf).filter(
+    (line) => line.y0 === line.y1 && Math.abs(line.x1 - line.x0 - width) < 0.01,
+  );
+}
+
 /** 塗りの形ごとに、その形を作る点の座標を返す */
 function fills(pdf: string): Point[][] {
   return [...pdf.matchAll(/^(.*) f$/gm)].map((m) => {
@@ -39,25 +63,34 @@ function fills(pdf: string): Point[][] {
   });
 }
 
-const combinations = PAPERS.flatMap((paper) => LAYOUTS.map((layout) => ({ paper, layout })));
+const combinations = PAPERS.flatMap((paper) =>
+  LAYOUTS.flatMap((layout) =>
+    [false, true].map((titleField) => ({
+      paper,
+      layout,
+      titleField,
+      title: titleField ? "あり" : "なし",
+    })),
+  ),
+);
 
 describe("用紙", () => {
   it("A4 を選んだとき、ページが A4 縦の大きさになること", () => {
-    const pdf = text(createStaffPaper("A4", "12staves").bytes);
+    const pdf = text(createStaffPaper("A4", "12staves", false).bytes);
     const [width, height] = mediaBox(pdf);
     expect(width).toBeCloseTo(210 * PT_PER_MM, 1);
     expect(height).toBeCloseTo(297 * PT_PER_MM, 1);
   });
 
   it("A3 見開きを選んだとき、ページが A3 横の大きさになること", () => {
-    const pdf = text(createStaffPaper("A3-spread", "12staves").bytes);
+    const pdf = text(createStaffPaper("A3-spread", "12staves", false).bytes);
     const [width, height] = mediaBox(pdf);
     expect(width).toBeCloseTo(420 * PT_PER_MM, 1);
     expect(height).toBeCloseTo(297 * PT_PER_MM, 1);
   });
 
   it("A3 見開きを選んだとき、左右の面に同じ段組みが並ぶこと", () => {
-    const pdf = text(createStaffPaper("A3-spread", "10staves").bytes);
+    const pdf = text(createStaffPaper("A3-spread", "10staves", false).bytes);
     const middle = 210 * PT_PER_MM;
     const left = lines(pdf).filter((line) => line.x1 < middle);
     const right = lines(pdf).filter((line) => line.x0 > middle);
@@ -74,18 +107,17 @@ describe("用紙", () => {
 });
 
 describe("段組み", () => {
-  it.each(LAYOUTS.filter((layout) => layout.kind === "single"))(
-    "$label を A4 で作ると、段数 × 5 本の横線が引かれること",
-    (layout) => {
-      const pdf = text(createStaffPaper("A4", layout.id).bytes);
-      const horizontal = lines(pdf).filter((line) => line.y0 === line.y1);
-      expect(horizontal).toHaveLength(layout.count * 5);
+  it.each(combinations.filter(({ layout }) => layout.kind === "single"))(
+    "$paper.label・$layout.label・タイトル欄$title のとき、面ごとに段数 × 5 本の横線が引かれること",
+    ({ paper, layout, titleField }) => {
+      const pdf = text(createStaffPaper(paper.id, layout.id, titleField).bytes);
+      expect(staffLines(pdf, paper)).toHaveLength(layout.count * 5 * paper.columns);
       expect(fills(pdf)).toHaveLength(0);
     },
   );
 
   it("大譜表 6 組を A4 で作ると、組ごとに横線 10 本と左端の縦線と波かっこが描かれること", () => {
-    const pdf = text(createStaffPaper("A4", "grand-staff-06systems").bytes);
+    const pdf = text(createStaffPaper("A4", "grand-staff-06systems", false).bytes);
     const horizontal = lines(pdf).filter((line) => line.y0 === line.y1);
     const vertical = lines(pdf).filter((line) => line.x0 === line.x1);
     const shapes = fills(pdf);
@@ -115,9 +147,9 @@ describe("段組み", () => {
   });
 
   it.each(combinations)(
-    "$paper.label・$layout.label のとき、線は各面の余白の内側に、波かっこは左の余白に収まること",
-    ({ paper, layout }) => {
-      const pdf = text(createStaffPaper(paper.id, layout.id).bytes);
+    "$paper.label・$layout.label・タイトル欄$title のとき、線は各面の余白の内側に、波かっこは左の余白に収まること",
+    ({ paper, layout, titleField }) => {
+      const pdf = text(createStaffPaper(paper.id, layout.id, titleField).bytes);
       const tolerance = 0.01;
       const faceWidth = (paper.width / paper.columns) * PT_PER_MM;
       const margin = MARGIN.x * PT_PER_MM;
@@ -148,14 +180,12 @@ describe("段組み", () => {
   );
 
   it.each(combinations)(
-    "$paper.label・$layout.label のとき、五線が重ならず上から順に並ぶこと",
-    ({ paper, layout }) => {
-      const pdf = text(createStaffPaper(paper.id, layout.id).bytes);
-      // 左の面の横線を上から並べ、5 本ずつを 1 段として見る
-      const ys = lines(pdf)
-        .filter(
-          (line) => line.y0 === line.y1 && line.x0 < (paper.width / paper.columns) * PT_PER_MM,
-        )
+    "$paper.label・$layout.label・タイトル欄$title のとき、五線が重ならず上から順に並ぶこと",
+    ({ paper, layout, titleField }) => {
+      const pdf = text(createStaffPaper(paper.id, layout.id, titleField).bytes);
+      // 左の面の五線を上から並べ、5 本ずつを 1 段として見る
+      const ys = staffLines(pdf, paper)
+        .filter((line) => line.x0 < (paper.width / paper.columns) * PT_PER_MM)
         .map((line) => line.y0)
         .sort((a, b) => b - a);
       const staves = Array.from({ length: ys.length / 5 }, (_, i) => ys.slice(i * 5, i * 5 + 5));
@@ -169,11 +199,78 @@ describe("段組み", () => {
   );
 });
 
+describe("タイトル欄", () => {
+  it.each(PAPERS)(
+    "$label でタイトル欄ありを選んだとき、面ごとに中央へ 120mm の線が 1 本引かれること",
+    (paper) => {
+      const pdf = text(createStaffPaper(paper.id, "12staves", true).bytes);
+      const faceWidth = paper.width / paper.columns;
+      const found = titleLines(pdf);
+      expect(found).toHaveLength(paper.columns);
+      found.forEach((line, face) => {
+        const center = (faceWidth * face + faceWidth / 2) * PT_PER_MM;
+        expect((line.x0 + line.x1) / 2).toBeCloseTo(center, 1);
+        // 欄は上の余白の下に取り、その中に線を引く
+        const y = (paper.height - MARGIN.top - TITLE_FIELD.lineY) * PT_PER_MM;
+        expect(line.y0).toBeCloseTo(y, 1);
+      });
+    },
+  );
+
+  it.each(PAPERS)("$label でタイトル欄なしを選んだとき、120mm の線が引かれないこと", (paper) => {
+    const pdf = text(createStaffPaper(paper.id, "12staves", false).bytes);
+    expect(titleLines(pdf)).toHaveLength(0);
+  });
+
+  it.each(combinations.filter(({ titleField }) => titleField))(
+    "$paper.label・$layout.label でタイトル欄ありを選んだとき、五線が欄より下に収まること",
+    ({ paper, layout }) => {
+      const pdf = text(createStaffPaper(paper.id, layout.id, true).bytes);
+      const top = (paper.height - MARGIN.top - TITLE_FIELD.height) * PT_PER_MM;
+      for (const line of staffLines(pdf, paper)) {
+        expect(line.y0).toBeLessThanOrEqual(top + 0.01);
+      }
+      const perUnit = layout.kind === "grand" ? 10 : 5;
+      expect(staffLines(pdf, paper)).toHaveLength(layout.count * perUnit * paper.columns);
+    },
+  );
+
+  it("A4 でタイトル欄ありを選んだとき、線が紙の上から 28mm・左から 45mm に 120mm 引かれること", () => {
+    // 寸法の定義が変わったら落ちるように、mm の実寸をそのまま書く
+    const pdf = text(createStaffPaper("A4", "12staves", true).bytes);
+    const [line] = titleLines(pdf);
+    if (!line) throw new Error("title line not found");
+    expect(line.x0 / PT_PER_MM).toBeCloseTo(45, 1);
+    expect(line.x1 / PT_PER_MM).toBeCloseTo(165, 1);
+    expect(297 - line.y0 / PT_PER_MM).toBeCloseTo(28, 1);
+  });
+
+  it("A4・12 段でタイトル欄ありを選んだとき、一番上の五線が紙の上から 41.5mm から始まること", () => {
+    // 上の余白 15mm + タイトル欄 20mm の下に、残り 247mm を 12 等分して割り付ける
+    const pdf = text(createStaffPaper("A4", "12staves", true).bytes);
+    const top = Math.max(...staffLines(pdf, PAPERS[0]).map((line) => line.y0));
+    expect(297 - top / PT_PER_MM).toBeCloseTo(41.5, 1);
+  });
+
+  it("タイトル欄ありを選んだとき、組み合わせの説明にそれが入ること", () => {
+    expect(describeStaffPaper("A4", "12staves", true)).toBe("A4・12 段・タイトル欄あり");
+    expect(describeStaffPaper("A3-spread", "grand-staff-06systems", false)).toBe(
+      "A3（A4 見開き）・大譜表 6 組",
+    );
+  });
+
+  it("タイトル欄ありとなしで、段数が変わらないこと", () => {
+    const without = text(createStaffPaper("A4", "16staves", false).bytes);
+    const withField = text(createStaffPaper("A4", "16staves", true).bytes);
+    expect(staffLines(withField, PAPERS[0])).toHaveLength(staffLines(without, PAPERS[0]).length);
+  });
+});
+
 describe("PDF のファイル", () => {
   it.each(combinations)(
-    "$paper.label・$layout.label のとき、相互参照表が各オブジェクトの位置を指していること",
-    ({ paper, layout }) => {
-      const bytes = createStaffPaper(paper.id, layout.id).bytes;
+    "$paper.label・$layout.label・タイトル欄$title のとき、相互参照表が各オブジェクトの位置を指していること",
+    ({ paper, layout, titleField }) => {
+      const bytes = createStaffPaper(paper.id, layout.id, titleField).bytes;
       const pdf = text(bytes);
       expect(pdf.startsWith("%PDF-1.4\n")).toBe(true);
       expect(pdf.endsWith("%%EOF\n")).toBe(true);
@@ -197,10 +294,13 @@ describe("PDF のファイル", () => {
     },
   );
 
-  it("ファイル名に用紙と段組みが入ること", () => {
-    expect(createStaffPaper("A3-spread", "grand-staff-06systems").fileName).toBe(
+  it("ファイル名に用紙と段組みが入り、タイトル欄ありなら分かること", () => {
+    expect(createStaffPaper("A3-spread", "grand-staff-06systems", false).fileName).toBe(
       "staffpaper-A3-spread-grand-staff-06systems.pdf",
     );
-    expect(createStaffPaper("A4", "08staves").fileName).toBe("staffpaper-A4-08staves.pdf");
+    expect(createStaffPaper("A4", "08staves", false).fileName).toBe("staffpaper-A4-08staves.pdf");
+    expect(createStaffPaper("A4", "08staves", true).fileName).toBe(
+      "staffpaper-A4-08staves-title.pdf",
+    );
   });
 });

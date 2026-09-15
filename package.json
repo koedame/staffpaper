@@ -15,11 +15,13 @@
     "lint:fix": "biome check --write .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "screenshot": "node scripts/screenshot.mjs",
     "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
     "deploy": "pnpm build && wrangler deploy"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.12",
+    "playwright": "1.63.0",
     "typescript": "5.9.3",
     "vite": "7.3.6",
     "vitest": "4.1.11",

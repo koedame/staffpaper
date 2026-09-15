@@ -9,20 +9,56 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <main>
-      <h1>staffpaper</h1>
-      <p class="lead">印刷用の五線紙を PDF で作る</p>
-      <form id="form">
-        <label>
-          <span>用紙</span>
-          <select name="paper" id="paper"></select>
-        </label>
-        <label>
-          <span>段組み</span>
-          <select name="layout" id="layout"></select>
-        </label>
-        <button type="submit">PDF をダウンロード</button>
+    <header class="header">
+      <img class="logo" src="/favicon.svg" alt="" width="28" height="28" />
+      <div class="brand">
+        <h1>staffpaper</h1>
+        <p>印刷用の五線紙を PDF で作る</p>
+      </div>
+    </header>
+    <main class="app">
+      <form class="settings" id="form">
+        <fieldset class="field">
+          <legend>用紙</legend>
+          <div class="options options--pair" id="paper-options"></div>
+        </fieldset>
+        <fieldset class="field">
+          <legend>段組み</legend>
+          <div class="options options--layout" id="layout-options"></div>
+        </fieldset>
+        <fieldset class="field">
+          <legend>タイトル欄</legend>
+          <div class="options options--pair" id="title-options"></div>
+        </fieldset>
+        <div class="download">
+          <button class="button" type="submit">
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 15V3" />
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <path d="m7 10 5 5 5-5" />
+            </svg>
+            PDF をダウンロード
+          </button>
+          <p class="note">ブラウザの中で作ります。サーバには何も送りません</p>
+        </div>
       </form>
+      <figure class="preview">
+        <div class="well">
+          <svg class="sheet" id="sheet" aria-hidden="true"></svg>
+        </div>
+        <figcaption class="summary" id="summary"></figcaption>
+      </figure>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
