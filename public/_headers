@@ -1,0 +1,9 @@
+# 本番の全レスポンスに付けるヘッダ。Cloudflare が dist/_headers を読む。
+# pnpm dev（vite）は読まないので、手元ではヘッダ無しで動く。pnpm screenshot は同じヘッダを付けて撮る。
+# 中身は src/security-headers.test.ts が見張る。変えるときはテストの理由と一緒に直す。
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Permissions-Policy: accelerometer=(), camera=(), display-capture=(), geolocation=(), gyroscope=(), hid=(), magnetometer=(), microphone=(), midi=(), payment=(), serial=(), usb=()

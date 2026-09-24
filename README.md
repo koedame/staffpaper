@@ -17,7 +17,7 @@ pnpm install
 pnpm dev          # 開発サーバ
 pnpm check        # lint / typecheck / test / build（CI と同じ）
 pnpm exec playwright install chromium   # 撮影に使うブラウザ（最初の 1 回だけ）
-pnpm build && pnpm screenshot           # 各画面を実ブラウザで撮って screenshots/ に置く
+pnpm build && pnpm screenshot           # 各画面を実ブラウザで撮って screenshots/ に置く（本番と同じヘッダで開く）
 pnpm run deploy   # ビルドして Cloudflare へ（`pnpm deploy` は pnpm 自身の別コマンド）
 ```
 
@@ -34,7 +34,8 @@ src/style.css           画面の見た目。色と角丸は ui.pen のテーマ
 src/staff-paper.ts      用紙・段組み・タイトル欄の定義と、五線の割り付け
 src/preview.ts          割り付けを SVG にする（PDF と同じ図形を使う）
 src/pdf.ts              1 ページの PDF をライブラリなしで組み立てる
-scripts/screenshot.mjs  各画面を実ブラウザで撮る
+public/_headers         本番の配信に付けるヘッダ（CSP など）。中身は src/security-headers.test.ts が見張る
+scripts/screenshot.mjs  各画面を実ブラウザで撮る。CSP の違反・コンソールのエラー・PDF のダウンロードの失敗があれば落ちる
 ```
 
 段組みを足すときは `src/staff-paper.ts` の `LAYOUTS` に 1 行足す。画面の選択肢もそこから作られる。
