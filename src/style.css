@@ -63,13 +63,6 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-.logo {
-  border-radius: 6px;
-  /* 暗い背景でも縁が見えるように、ロゴの内側に薄い枠を重ねる */
-  outline: 1px solid #ffffff24;
-  outline-offset: -1px;
-}
-
 .brand {
   display: flex;
   flex-direction: column;
@@ -209,13 +202,6 @@ body {
 .button:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
-}
-
-.note {
-  margin: 0;
-  font-size: 12px;
-  color: var(--text-secondary);
-  text-align: center;
 }
 
 /* プレビュー — 選んだ組み合わせの仕上がりを、PDF と同じ割り付けで見せる */
