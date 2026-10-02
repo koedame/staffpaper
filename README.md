@@ -35,6 +35,7 @@ src/staff-paper.ts      用紙・段組み・タイトル欄の定義と、五�
 src/preview.ts          割り付けを SVG にする（PDF と同じ図形を使う）
 src/pdf.ts              1 ページの PDF をライブラリなしで組み立てる
 public/_headers         本番の配信に付けるヘッダ（CSP など）。中身は src/security-headers.test.ts が見張る
+public/third-party-licenses.txt  載せている他人の素材（Lucide のアイコン）の著作権表示と許諾の文面。素材を足したら同じファイルに足す（src/third-party-notice.test.ts が見張る）
 scripts/screenshot.mjs  各画面を実ブラウザで撮る。CSP の違反・コンソールのエラー・PDF のダウンロードの失敗があれば落ちる
 ```
 
