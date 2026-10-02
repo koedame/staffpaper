@@ -8,6 +8,7 @@
 
 import { describe, expect, it } from "vitest";
 import html from "../index.html?raw";
+import headers from "../public/_headers?raw";
 import notice from "../public/third-party-licenses.txt?raw";
 
 describe("第三者の著作権表示", () => {
@@ -16,5 +17,11 @@ describe("第三者の著作権表示", () => {
     expect(notice).toContain("Lucide");
     expect(notice).toContain("Lucide Icons and Contributors");
     expect(notice).toContain("Cole Bemis");
+  });
+
+  it("表示のファイルを開いたとき、文字コードが UTF-8 と宣言されていること（日本語の説明が文字化けしない）", () => {
+    expect(headers).toMatch(
+      /^\/third-party-licenses\.txt\n\s+Content-Type: text\/plain; charset=utf-8$/m,
+    );
   });
 });
