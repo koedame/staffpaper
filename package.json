@@ -33,6 +33,11 @@
       "@biomejs/biome",
       "esbuild",
       "workerd"
-    ]
+    ],
+    "overrides": {
+      "undici": "^7.29.1",
+      "source-map-js": "^1.2.2",
+      "sharp": "^0.35.5"
+    }
   }
 }
