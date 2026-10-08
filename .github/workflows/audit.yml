@@ -1,0 +1,33 @@
+name: audit
+
+# Audits the lockfile against the npm advisory database. A new advisory can
+# appear without any change to this repository, so besides pushes and pull
+# requests that touch the lockfile this runs every week; a failing scheduled
+# run is how a freshly published advisory reaches us.
+#
+# Fails from "high" up. Dev dependencies are included (no --prod), since the
+# build and the deploy run on them.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - pnpm-lock.yaml
+      - package.json
+      - .github/workflows/audit.yml
+  schedule:
+    - cron: "17 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+      - run: pnpm audit --audit-level high
