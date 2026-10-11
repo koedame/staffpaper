@@ -13,3 +13,7 @@ updates:
       npm-major:
         update-types: ["major"]
         group-by: dependency-name
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
