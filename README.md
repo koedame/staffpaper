@@ -1,14 +1,28 @@
 # staffpaper
 
-印刷用の五線紙を PDF で作る。用紙と段組みを選ぶと、その場で PDF を作ってダウンロードする。
+**印刷用の五線紙を、ブラウザの中で PDF にします。** 用紙と段組みを選ぶだけ。アプリの導入もアカウントも要りません。
 
-https://staffpaper.koeda.me
+**[staffpaper を開く →](https://staffpaper.koeda.me)**
 
-- 用紙: A4 / A3（A4 見開き。左右の面に A4 と同じ段組みを並べる）
-- 段組み: 6・8・10・12・14・16 段 / 大譜表 6 組
-- タイトル欄: なし / あり（上の余白の下に 20mm の欄を取り、中央に線を 1 本引く）
-- 選んだ組み合わせの仕上がりを、PDF と同じ割り付けでプレビューに出す
-- PDF はブラウザの中で作る。選んだ内容も、作った PDF も、どこにも送らない・保存しない
+![A4・12 段・タイトル欄ありを選んだ画面。左で用紙と段組みを選び、右に仕上がりのプレビューが出る](docs/screen.png)
+
+手書きで曲を書き留めたいとき、好みの段数の五線紙をその場で刷れます。
+選んだ組み合わせの仕上がりを見せてから、そのまま印刷できる PDF を作ります。
+
+## できること
+
+- **用紙を選ぶ。** A4、または A3（A4 見開き。左右の面に A4 と同じ段組みを並べます）。
+- **段組みを選ぶ。** 6・8・10・12・14・16 段、または大譜表 6 組。
+- **タイトル欄をつける。** 上の余白の下に 20mm の欄を取り、中央に線を 1 本引きます。
+- **仕上がりを見てから作る。** 選んだ組み合わせのプレビューは、PDF と同じ割り付けで描いています。
+  見えている形がそのまま PDF になります。
+- **どこにも送らない。** PDF はブラウザの中で作ります。選んだ内容も、作った PDF も、送らず・保存しません。
+
+## 使い方
+
+1. [ページ](https://staffpaper.koeda.me)を開きます。
+2. 用紙・段組み・タイトル欄を選びます。右のプレビューが変わります。
+3. **PDF をダウンロード**を押して、印刷します。
 
 ## このページについて
 
@@ -17,34 +31,4 @@ https://staffpaper.koeda.me
 - 運営: koedame（個人）。問い合わせは GitHub の Issues、脆弱性は [SECURITY.md](SECURITY.md)
 - ライセンス: MIT（[LICENSE](LICENSE)）。無保証
 
-## 使い方
-
-```
-pnpm install
-pnpm dev          # 開発サーバ
-pnpm check        # lint / typecheck / test / build（CI と同じ）
-pnpm exec playwright install chromium   # 撮影に使うブラウザ（最初の 1 回だけ）
-pnpm build && pnpm screenshot           # 各画面を実ブラウザで撮って screenshots/ に置く（本番と同じヘッダで開く）
-pnpm run deploy   # ビルドして Cloudflare へ（`pnpm deploy` は pnpm 自身の別コマンド）
-```
-
-デプロイは Cloudflare Workers の静的アセット配信（`wrangler.jsonc`）。
-`wrangler login` するか、環境変数 `CLOUDFLARE_API_TOKEN` を渡して叩く。
-
-## 構成
-
-```
-index.html              画面（設定とプレビュー）
-ui.pen                  画面のデザイン（pen.dev）。アプリからは読まない
-src/main.ts             画面の選択肢を作り、選ばれた組み合わせを描いてダウンロードさせる
-src/style.css           画面の見た目。色と角丸は ui.pen のテーマ変数と同じ値
-src/staff-paper.ts      用紙・段組み・タイトル欄の定義と、五線の割り付け
-src/preview.ts          割り付けを SVG にする（PDF と同じ図形を使う）
-src/pdf.ts              1 ページの PDF をライブラリなしで組み立てる
-public/_headers         本番の配信に付けるヘッダ（CSP など）。中身は src/security-headers.test.ts が見張る
-public/third-party-licenses.txt  載せている他人の素材（Lucide のアイコン）の著作権表示と許諾の文面。素材を足したら同じファイルに足す（src/third-party-notice.test.ts が見張る）
-scripts/screenshot.mjs  各画面を実ブラウザで撮る。CSP の違反・コンソールのエラー・PDF のダウンロードの失敗があれば落ちる
-```
-
-段組みを足すときは `src/staff-paper.ts` の `LAYOUTS` に 1 行足す。画面の選択肢もそこから作られる。
-プレビューと PDF は同じ `Sheet`（mm の図形の集まり）から描くので、見えている形と PDF の中身はずれない。
+開発に加わるときは [CONTRIBUTING.md](CONTRIBUTING.md) を見てください。
