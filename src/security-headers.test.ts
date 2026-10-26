@@ -74,7 +74,8 @@ describe("本番の配信ヘッダ", () => {
 
   it("HTTP で開いたとき、HTTPS に強制され、型の推測と参照元の送信も止まること", () => {
     const headers = rootHeaders();
-    expect(headers["strict-transport-security"]).toMatch(/^max-age=\d{8,}/);
+    // 本番では配信側の既定の HSTS（180 日）が優先されるので、同じ値にそろえている
+    expect(headers["strict-transport-security"]).toBe("max-age=15552000");
     expect(headers["x-content-type-options"]).toBe("nosniff");
     expect(headers["referrer-policy"]).toBe("no-referrer");
   });

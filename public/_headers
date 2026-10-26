@@ -3,7 +3,7 @@
 # 中身は src/security-headers.test.ts が見張る。変えるときはテストの理由と一緒に直す。
 /*
   Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
-  Strict-Transport-Security: max-age=31536000
+  Strict-Transport-Security: max-age=15552000
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
   Permissions-Policy: accelerometer=(), camera=(), display-capture=(), geolocation=(), gyroscope=(), hid=(), magnetometer=(), microphone=(), midi=(), payment=(), serial=(), usb=()
