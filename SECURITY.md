@@ -6,6 +6,8 @@ Please report security problems privately through
 [GitHub's private vulnerability reporting](https://github.com/koedame/staffpaper/security/advisories/new).
 Do not open a public issue for them.
 
+We will reply within 7 days to confirm that we received your report, and keep you updated until it is fixed.
+
 ## Supported versions
 
 Security fixes are applied to the version published at https://staffpaper.koeda.me only.

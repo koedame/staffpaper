@@ -1,0 +1,4 @@
+Contact: https://github.com/koedame/staffpaper/security/advisories/new
+Expires: 2027-10-31T00:00:00.000Z
+Preferred-Languages: ja, en
+Canonical: https://staffpaper.koeda.me/.well-known/security.txt
