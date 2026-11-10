@@ -17,3 +17,7 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      # CodeQL の init と analyze は同じ版でないと解析が動かない。片方だけを上げる PR は落ちるので、1 本にまとめる。
+      codeql-action:
+        patterns: ["github/codeql-action/*"]
