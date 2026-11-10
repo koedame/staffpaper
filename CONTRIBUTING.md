@@ -17,6 +17,8 @@ pnpm dev          # 開発サーバ
 pnpm check        # lint / typecheck / test / build（CI と同じ）
 ```
 
+開発サーバは手元（localhost）だけで使ってください。`--host` や `server.host` でネットワークに出すと、同じネットワークの他の端末から開発サーバのファイルが読まれる・コードを動かされるおそれがあります。
+
 ## 画面を実ブラウザで確かめる
 
 ```
