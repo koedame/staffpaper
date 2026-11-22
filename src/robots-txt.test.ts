@@ -6,6 +6,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import headersFile from "../public/_headers?raw";
 import robots from "../public/robots.txt?raw";
 
 /** `User-agent: *` の節の `名前: 値` を { 名前（小文字）: 値 } にする。 */
@@ -32,5 +33,12 @@ describe("クローラへの意思表示（robots.txt）", () => {
   it("クローラが読むとき、サイト全体を取得してよいこと（Disallow が無い）", () => {
     expect(wildcardGroup().allow).toBe("/");
     expect(robots).not.toMatch(/^\s*disallow:\s*\S/im);
+  });
+
+  it("配るとき、文字コードを付けた text/plain で返す指定があること", () => {
+    const lines = headersFile.split("\n");
+    const start = lines.indexOf("/robots.txt");
+    expect(start, "_headers に /robots.txt の節が無い").toBeGreaterThanOrEqual(0);
+    expect(lines[start + 1]?.trim().toLowerCase()).toBe("content-type: text/plain; charset=utf-8");
   });
 });
