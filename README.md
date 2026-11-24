@@ -30,5 +30,6 @@
 - 配信の事業者に届くもの: ページを開いたときのアクセスの記録（IP アドレスなど）。配信の事業者が HTML に差し込むスクリプトは、このページのヘッダ（CSP）で止めている
 - 運営: koedame（個人）。問い合わせは GitHub の Issues、脆弱性は [SECURITY.md](SECURITY.md)
 - ライセンス: MIT（[LICENSE](LICENSE)）。無保証
+- robots.txt の `Content-Signal` は、サイトのページを巡回する側への意思表示で、ライセンスの条件ではありません。MIT のライセンスは変わらず、学習を含む用途にもその条件で使えます
 
 開発に加わるときは [CONTRIBUTING.md](CONTRIBUTING.md) を見てください。
