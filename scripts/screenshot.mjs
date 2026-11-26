@@ -23,6 +23,8 @@ const TYPES = {
 
 const PC = { width: 1280, height: 800 };
 const MOBILE = { width: 390, height: 934 };
+// README のヒーロー画像。GitHub で映える横長（16:9）で撮り、docs/images/ に写す
+const HERO = { width: 1280, height: 720 };
 
 /** dist/_headers の `/*` の節（全レスポンスに付けるヘッダ）を [名前, 値] の並びにする */
 async function rootHeaders() {
@@ -68,6 +70,18 @@ const SCREENS = [
     viewport: MOBILE,
     colorScheme: "dark",
     choose: ["A4", "8 段", "なし"],
+  },
+  {
+    name: "readme-hero-light",
+    viewport: HERO,
+    colorScheme: "light",
+    choose: ["A4", "12 段", "あり"],
+  },
+  {
+    name: "readme-hero-dark",
+    viewport: HERO,
+    colorScheme: "dark",
+    choose: ["A4", "12 段", "あり"],
   },
 ];
 
