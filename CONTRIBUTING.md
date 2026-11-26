@@ -29,7 +29,7 @@ pnpm build && pnpm screenshot           # 各画面を実ブラウザで撮っ�
 見た目・レイアウト・実寸はユニットテストでは測れないので、画面を変えたら撮って目で見ます。
 各画面で PDF のダウンロードまで押し、CSP の違反・コンソールのエラー・ダウンロードの失敗があれば落ちます。
 
-README の絵は `docs/screen.png`（`pc-a4-12staves-title` の撮影結果）です。画面の見た目を変えたら撮り直します。
+README の絵は `docs/images/hero-light.png` と `hero-dark.png`（`readme-hero-light` / `readme-hero-dark` の撮影結果）です。画面の見た目を変えたら撮り直します。
 
 ## 構成
 
